@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 :root {
   --background: #fdf2f0;
-  --foreground: #1a1a1a;
-  --primary: #ff7675;
-  --primary-glow: #fab1a0;
+  --foreground: #34495e;
+  --primary: #ff9a8b;
+  --primary-glow: #fad1a6;
   --secondary: #6c5ce7;
   --accent: #fdcb6e;
   --glass: rgba(255, 255, 255, 0.4);
@@ -40,8 +42,8 @@ body {
 }
 
 body {
-  background: #fdf2f0;
-  /* Soft peach background from screenshot */
+  background: linear-gradient(180deg, #FDEBD0 0%, #F5CBA7 100%);
+  /* Warm peach/gold gradient from new screenshot */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -64,36 +66,46 @@ body {
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #1a1a1a;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: #34495e;
+  margin-bottom: 0px;
+  line-height: 1.1;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3.5rem;
   font-weight: 400;
-  opacity: 0.8;
+  color: #34495e;
+  margin-top: -10px;
   margin-bottom: 2rem;
 }
 
+.illustration-box {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
 .btn-create {
-  background: linear-gradient(135deg, #ffbdad 0%, #a29bfe 100%);
+  background: linear-gradient(to right, #FFEDD5, #FFA38E);
   color: white;
-  padding: 20px 60px;
+  padding: 24px 80px;
   border-radius: 100px;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 30px rgba(255, 189, 173, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 15px 35px rgba(255, 163, 142, 0.3);
   display: inline-block;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .btn-create:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(255, 189, 173, 0.6);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(255, 163, 142, 0.5);
 }
 
 .btn-create:active {

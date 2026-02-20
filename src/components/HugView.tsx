@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, RefreshCw } from 'lucide-react'
 import { returnHug } from '@/lib/actions'
+import Link from 'next/link'
 
 export default function HugView({ hug }: { hug: any }) {
     const [returned, setReturned] = useState(hug.isReturned)
@@ -30,33 +31,31 @@ export default function HugView({ hug }: { hug: any }) {
             textAlign: 'center'
         }}>
             <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 100 }}
-                className="glass-card"
-                style={{ padding: '60px', maxWidth: '600px', width: '100%', position: 'relative', overflow: 'hidden' }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
             >
-                <div style={{ position: 'absolute', top: -20, left: -20, opacity: 0.1 }}>
-                    <Heart size={200} fill="var(--primary)" />
-                </div>
+                <h1 className="hero-title">You have been</h1>
+                <h2 className="hero-subtitle">hugged!</h2>
 
                 <motion.div
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    style={{ marginBottom: '30px' }}
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                    className="illustration-box"
                 >
-                    <Heart size={80} color="var(--primary)" fill="var(--primary)" />
+                    <svg width="220" height="220" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M75 160C75 160 55 140 55 110C55 80 75 60 100 60C125 60 145 80 145 110C145 140 125 160 125 160" stroke="#34495e" strokeWidth="1.5" strokeLinecap="round" />
+                        <path d="M100 160V175" stroke="#34495e" strokeWidth="1.5" />
+                        <path d="M60 170H140" stroke="#34495e" strokeWidth="1.5" />
+
+                        <circle cx="85" cy="85" r="25" fill="#FAD1A6" fillOpacity="0.4" stroke="#34495e" strokeWidth="1" />
+                        <circle cx="115" cy="85" r="25" fill="#FFAD99" fillOpacity="0.4" stroke="#34495e" strokeWidth="1" />
+
+                        <path d="M80 85C80 85 83 83 86 85" stroke="#34495e" strokeWidth="1" />
+                        <path d="M114 85C114 85 117 83 120 85" stroke="#34495e" strokeWidth="1" />
+                    </svg>
                 </motion.div>
-
-                <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-                    {hug.type === 'GLOBAL' ? "You've been hugged!" : `Hi ${hug.targetName}!`}
-                </h1>
-
-                <p style={{ fontSize: '1.2rem', marginBottom: '40px', opacity: 0.8 }}>
-                    {hug.type === 'GLOBAL'
-                        ? "Sending you a digital embrace to brighten your day!"
-                        : `${hug.senderName} has sent you a special hug!`}
-                </p>
 
                 <AnimatePresence mode="wait">
                     {!returned ? (
@@ -67,10 +66,10 @@ export default function HugView({ hug }: { hug: any }) {
                             exit={{ opacity: 0 }}
                             onClick={handleHugBack}
                             disabled={loading}
-                            className="btn-primary"
-                            style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '0 auto' }}
+                            className="btn-create"
+                            style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px 60px', fontSize: '1.5rem', cursor: 'pointer', border: 'none' }}
                         >
-                            <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
+                            <RefreshCw size={24} className={loading ? 'animate-spin' : ''} />
                             {loading ? 'Sending...' : 'Hug Back'}
                         </motion.button>
                     ) : (
@@ -78,20 +77,17 @@ export default function HugView({ hug }: { hug: any }) {
                             key="hugged-back"
                             initial={{ scale: 0.5, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '1.1rem' }}
+                            style={{ color: '#34495e', fontWeight: 700, fontSize: '1.5rem' }}
                         >
                             You hugged back! ❤️
                         </motion.div>
                     )}
                 </AnimatePresence>
-            </motion.div>
 
-            <div style={{ marginTop: '40px' }}>
-                <p style={{ opacity: 0.6 }}>Want to send a hug to someone else?</p>
-                <a href="/" className="btn-primary" style={{ display: 'inline-block', marginTop: '10px', background: 'transparent', border: '2px solid var(--primary)', color: 'var(--primary)', boxShadow: 'none' }}>
-                    Create My Own Hug
-                </a>
-            </div>
+                <Link href="/dashboard" style={{ marginTop: '40px', opacity: 0.6, textDecoration: 'underline', color: '#34495e' }}>
+                    Create my own hug
+                </Link>
+            </motion.div>
         </div>
     )
 }
