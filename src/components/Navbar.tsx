@@ -8,40 +8,35 @@ export const Navbar = () => {
     const { data: session } = useSession()
 
     return (
-        <nav className="glass-card" style={{
-            margin: '20px auto',
-            maxWidth: '1200px',
-            width: '90%',
-            padding: '12px 24px',
+        <nav style={{
+            margin: '20px auto 40px',
+            maxWidth: '1000px',
+            width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            position: 'sticky',
-            top: '20px',
             zIndex: 100
         }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.5rem', fontWeight: 800, color: 'var(--primary)' }}>
-                <Heart fill="var(--primary)" size={32} />
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.2rem', fontWeight: 800 }}>
+                <Heart fill="var(--primary)" size={24} color="var(--primary)" />
                 <span>ihug.you</span>
             </Link>
 
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
                 {session ? (
-                    <>
-                        <Link href="/dashboard" style={{ fontWeight: 600 }}>Dashboard</Link>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            {session.user?.image && (
-                                <img src={session.user.image} alt="Profile" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
-                            )}
-                            <button onClick={() => signOut()} title="Sign Out">
-                                <LogOut size={20} />
-                            </button>
-                        </div>
-                    </>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                        <Link href="/dashboard" style={{ fontWeight: 600, fontSize: '0.9rem', opacity: 0.7 }}>Dashboard</Link>
+                        <button onClick={() => signOut()} title="Sign Out" style={{ opacity: 0.5 }}>
+                            <LogOut size={18} />
+                        </button>
+                        {session.user?.image && (
+                            <img src={session.user.image} alt="Profile" style={{ width: '28px', height: '28px', borderRadius: '50%' }} />
+                        )}
+                    </div>
                 ) : (
-                    <button onClick={() => signIn('google')} className="btn-primary" style={{ padding: '8px 20px' }}>
-                        Sign In
-                    </button>
+                    <Link href="/dashboard" style={{ fontWeight: 600, fontSize: '0.9rem', opacity: 0.7 }}>
+                        My Stats
+                    </Link>
                 )}
             </div>
         </nav>
