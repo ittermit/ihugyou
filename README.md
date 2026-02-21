@@ -4,8 +4,8 @@ A viral web service to send digital hugs.
 
 ## Tech Stack
 - **Framework**: Next.js 15+ (App Router)
-- **Database**: Supabase (PostgreSQL)
-- **Auth**: NextAuth.js (Google OAuth) + Supabase
+- **Database**: PostgreSQL (Railway)
+- **Auth**: NextAuth.js (Google OAuth) + Prisma
 - **Styling**: Vanilla CSS + Framer Motion
 - **Icons**: Lucide React
 - **Short Links**: Nanoid
