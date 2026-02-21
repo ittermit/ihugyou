@@ -5,8 +5,14 @@ import { returnHug, trackVisit } from "@/lib/actions"
 import { Navbar } from "@/components/Navbar"
 import HugView from "@/components/HugView"
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const hug = await prisma.hug.findUnique({ where: { slug: params.slug } })
+type PageProps = {
+    params: Promise<{ slug: string }>
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export async function generateMetadata({ params }: PageProps) {
+    const { slug } = await params
+    const hug = await prisma.hug.findUnique({ where: { slug } })
     if (!hug) return {}
 
     const title = hug.type === 'GLOBAL'
@@ -25,8 +31,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
 }
 
-export default async function HugPage({ params }: { params: { slug: string } }) {
-    const { slug } = params
+export default async function HugPage({ params }: PageProps) {
+    const { slug } = await params
     const hug = await prisma.hug.findUnique({ where: { slug } })
 
     if (!hug) notFound()
